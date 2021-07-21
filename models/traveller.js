@@ -27,15 +27,26 @@ Traveller.prototype.calculateTotalDistanceTravelled = function () {
   return result;
 };
 
+// Traveller.prototype.getUniqueModesOfTransport = function () {
+//   modes = [];
+//   this.journeys.forEach((journey) => {
+//     if (modes.includes(journey.transport) !== true){
+//       modes.push(journey.transport);
+//     } 
+//   })
+//   return modes;
+// };
+
 Traveller.prototype.getUniqueModesOfTransport = function () {
-  modes = [];
-  this.journeys.forEach((journey) => {
-    if (modes.includes(journey.transport) !== true){
-      modes.push(journey.transport);
-    } 
-  })
+  const modes = this.journeys.reduce((accumulator, journey) => {
+    if (accumulator.indexOf(journey.transport) === -1){
+      accumulator.push(journey.transport);
+    }
+    return accumulator;
+  }, []);
   return modes;
-};
+}
+
 
 
 module.exports = Traveller;
